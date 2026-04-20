@@ -1,0 +1,102 @@
+# =========================
+# Ambiente virtual (uv)
+# =========================
+.venv/
+venv/
+env/
+ENV/
+
+# =========================
+# Cache Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribuição / build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =========================
+# Arquivos de log
+# =========================
+*.log
+logs/
+log/
+
+# =========================
+# Arquivos temporários
+# =========================
+*.tmp
+*.swp
+*.bak
+*.~*
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# =========================
+# Playwright (se usar)
+# =========================
+playwright-report/
+test-results/
+blob-report/
+browser-data/
+
+# =========================
+# Arquivos de automação
+# =========================
+downloads/
+screenshots/
+screens/
+output/
+reports/
+
+# =========================
+# Coverage / Test
+# =========================
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# =========================
+# Variáveis de ambiente
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# MongoDB
+# =========================
+# Diretório padrão de dados do Mongo
+/data/db/
+/data/configdb/
+
+# Dumps e backups
+dump/
+*.bson
+*.metadata.json
+
+# Logs do Mongo
+mongodb.log
+mongod.log
+
+# Arquivos de lock
+mongod.lock
+WiredTiger.lock
+WiredTiger.turtle
+WiredTiger.wt
+WiredTigerHS.wt
