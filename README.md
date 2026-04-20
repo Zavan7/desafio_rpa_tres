@@ -1,74 +1,141 @@
-## 📌 Automação de Teste com Playwright
+# RPA UV Tres
 
-> ⚠️ **Disclaimer**
-> Esta aplicação ainda está em desenvolvimento ativo e pode sofrer alterações significativas na estrutura, funcionalidades e implementação ao longo do tempo.
+> ⚠️ **Aviso**
+> Esta aplicação está em desenvolvimento ativo e pode sofrer alterações significativas na estrutura, funcionalidades e implementação ao longo do tempo.
 
-Este projeto implementa um fluxo de automação utilizando Playwright com Python, focado na validação de cenários de login com falha e verificação de mensagens exibidas na interface.
+Este projeto é uma automação RPA (Robotic Process Automation) desenvolvida em Python utilizando Playwright para testes automatizados de cenários de login com falha. O objetivo é validar o comportamento da aplicação web durante tentativas de login inválidas, garantindo que as mensagens de erro sejam exibidas corretamente.
 
----
+## 🎯 Objetivos
 
-## 🎯 Objetivo
+- Automatizar o fluxo de navegação e interação com a interface web
+- Validar cenários de falha no login
+- Registrar logs detalhados para observabilidade
+- Integrar com MongoDB para armazenamento de dados (opcional)
 
-Validar o comportamento da aplicação ao realizar uma tentativa de login inválida, garantindo que:
+## ✨ Funcionalidades
 
-- O fluxo de navegação ocorre corretamente  
-- As interações com a UI são executadas com sucesso  
-- A mensagem de erro esperada é exibida ao usuário  
+- Navegação automatizada através de páginas web
+- Preenchimento e submissão de formulários de login
+- Validação de mensagens de erro na UI
+- Logging estruturado com níveis de severidade
+- Suporte opcional ao MongoDB para persistência de dados
+- Configuração via variáveis de ambiente
 
----
+## 📋 Pré-requisitos
 
-## ⚙️ Estrutura do Projeto
+- Python 3.14 ou superior
+- MongoDB (opcional, se `USE_MONGO=true`)
+- Navegador compatível com Playwright (Chrome, Firefox, etc.)
 
-O projeto segue uma separação clara de responsabilidades:
+## 🚀 Instalação
 
-### 📁 pages/
-- **InitialPage**: acessa a aplicação e inicia o desafio  
-- **StartChallenge**: navega até a página de login  
-- **LoginFaillChallenge**: executa o login com credenciais inválidas  
+1. Clone o repositório:
+   ```bash
+   git clone <url-do-repositorio>
+   cd rpa-uv-tres
+   ```
 
-### 📁 validators/
-- **Validation**: valida a presença de mensagens na tela  
+2. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   # ou se usar pyproject.toml
+   pip install .
+   ```
 
-### 📁 config/
-- Configuração de logging estruturado  
+3. Instale os navegadores do Playwright:
+   ```bash
+   playwright install
+   ```
 
-### 📄 main (orquestrador)
-- Controla o fluxo completo da automação  
+## ⚙️ Configuração
 
----
+1. Copie o arquivo de exemplo de variáveis de ambiente:
+   ```bash
+   cp env-exemple .env
+   ```
 
-## 🔄 Fluxo da Automação
+2. Edite o arquivo `.env` com suas configurações:
+   ```env
+   USERNAME=seu_usuario
+   PASSWORD=sua_senha
 
-1. Acessa a URL da aplicação  
-2. Localiza e clica no elemento que inicia o desafio  
-3. Navega até a página de login  
-4. Preenche usuário e senha inválidos  
-5. Executa a tentativa de login  
-6. Valida se a mensagem de erro é exibida  
-7. Registra logs detalhados de cada etapa  
+   # URI do MongoDB para ambiente local
+   MONGO_URI_LOCAL=mongodb://localhost:27017
 
----
+   # URI do MongoDB para ambiente Docker
+   MONGO_URI_DOCKER=mongodb://mongo:27017
+
+   MONGO_DB=nome_do_banco
+   USE_MONGO=true  # ou false para desabilitar
+   ENVIRONMENT=local  # ou docker
+   ```
+
+## 📖 Uso
+
+Execute o script principal para iniciar a automação:
+
+```bash
+python main.py
+```
+
+O fluxo executará automaticamente:
+1. Acesso à página inicial da aplicação
+2. Início do desafio
+3. Navegação para a página de login
+4. Tentativa de login com credenciais inválidas
+5. Validação da mensagem de erro
+6. Registro de logs em `logs/`
+
+## 📁 Estrutura do Projeto
+
+```
+rpa-uv-tres/
+├── config/
+│   └── log.py              # Configuração de logging
+├── db/
+│   └── mongo.py            # Classe para integração com MongoDB
+├── downloads/              # Diretório para downloads
+├── logs/                   # Arquivos de log gerados
+├── pages/
+│   ├── initial_page.py     # Página inicial e início do desafio
+│   ├── login_faill.py      # Cenário de falha no login
+│   └── start_challenge.py  # Navegação para o desafio
+├── utils/
+│   └── validators/
+│       └── validator.py    # Validações de UI
+├── env-exemple             # Exemplo de arquivo .env
+├── main.py                 # Script principal (orquestrador)
+├── pyproject.toml          # Configuração do projeto Python
+└── README.md               # Este arquivo
+```
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Python 3.14+**: Linguagem principal
+- **Playwright**: Automação de navegadores web
+- **PyMongo**: Driver para MongoDB
+- **python-dotenv**: Carregamento de variáveis de ambiente
+- **python-json-logger**: Logging estruturado em JSON
 
 ## 📊 Logs e Observabilidade
 
-O projeto utiliza logging estruturado para fornecer visibilidade completa da execução:
+O projeto utiliza logging estruturado para rastrear todas as operações:
 
-- `INFO`: etapas principais do fluxo  
-- `DEBUG`: detalhes técnicos  
-- `WARNING`: comportamentos inesperados  
-- `ERROR`: falhas com stack trace  
+- **INFO**: Etapas principais do fluxo
+- **DEBUG**: Detalhes técnicos das operações
+- **WARNING**: Comportamentos inesperados
+- **ERROR**: Falhas críticas com stack trace
 
----
+Os logs são salvos em `logs/` e podem ser visualizados em tempo real no console.
 
-## 🔐 Variáveis de Ambiente
+## 🤝 Contribuição
 
-As credenciais são carregadas via `.env`:
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abra um Pull Request
 
-```env
-USERNAME=CHANGE ME
-PASSWORD=CHANGE ME
+## 📄 Licença
 
-MONGO_URI=CHANGE ME
-MONGO_DB=rCHANGE ME
-
-USE_MONGO=CHANGE ME
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.

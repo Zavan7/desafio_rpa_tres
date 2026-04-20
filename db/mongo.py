@@ -25,7 +25,7 @@ class MongoDB:
 
         self.client = MongoClient(uri)
         self.db = self.client[db_name]
-        self.collection = self.db["executions"]
+        self.collection = self.db["challenge_three"]
         self.enabled = True
 
     def insert(self, data: dict):
